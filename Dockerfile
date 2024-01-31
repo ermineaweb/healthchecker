@@ -1,7 +1,8 @@
 FROM golang:1.21.5 as builder
 WORKDIR /build
-COPY main.go go.mod ./
-RUN CGO_ENABLED=0 go build -o ./bin/healthchecker ./main.go
+COPY go.* ./
+COPY ./cmd ./cmd
+RUN CGO_ENABLED=0 go build -o ./bin/healthchecker ./cmd/main.go
 
 FROM scratch
 WORKDIR /app
